@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- You write veu sytax this div -->
+        <p v-if="count >= 0">{{message}} = {{count}}</p>
+        <p v-else>{{message}} = Invalid</p>
+        <p>Example of Reactivity</p>
+        <button @click="handleClick" type="button">Increase count!</button>
+        <br>
+        <button @click="decreaseCount" type="button">decrease count!</button>
+        <br>
+        <p>V-Model</p>
+        <input type="text" v-model="newItem">
+        <button @click="addNewItem" type="button">Add new items</button>
+        <br>
+           <div v-for="items in countries">
+            <p>- {{items}}</p> <button type="button" @click="deleteItem">Remove</button>
+           </div>
+    </div>
+
+    <!-- <div id="normal">
+        <p>{{message}}</p>
+    </div> -->
+
+    <script>
+        const { createApp } = Vue
+
+        const app = createApp({
+
+            data() {
+                return {
+                    message: 'Hello Vue!',
+                    count : 0,
+                    countries: ['USA', 'Canada', 'Mexico'],
+                    newItem: ''
+                }
+            },
+            methods: {
+                handleClick() {
+                    this.count++
+                },
+                decreaseCount() {
+                    this.count--
+                },
+                addNewItem() {
+                    this.countries.push(this.newItem);
+                    this.newItem = ''; // Clear the input after adding
+                },
+                deleteItem(index) {
+                    this.countries.splice(index, 1); // Remove item at index
+                }
+            },
+        })
+        app.mount('#app')
+        /*
+        // Vue 2 instance
+        const app2 = createApp({
+
+            data() {
+                return {
+                    message: 'Hello Vue2!'
+                }
+            }
+        })
+        app2.mount('#normal')
+
+        */
+        
+    </script>
+</body>
+
+</html>
